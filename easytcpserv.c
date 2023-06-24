@@ -15,7 +15,7 @@ void callback(char *dataBuffer, int dataSize, TSI *tsi);
 
 int main(int argc, char *argv[]) {
 
-	TSI *tsi = easyTcpServer("192.168.0.121", 8383, "PaTn", &callback);
+	TSI *tsi = easyTcpServer("192.168.0.15", 8383, "PaTn", &callback);
 	if (tsi == NULL) {
 		printf("Failed to create socket.\n");
 		exit(1);

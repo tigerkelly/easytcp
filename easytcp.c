@@ -142,7 +142,7 @@ void *_easyTcpAccept(void *param) {
 	}
 }
 
-// Only to be called by the easyTcpAccept function.
+// Only to be called by the _easyTcpAccept function.
 void *_easyTcpCapture(void *param) {
 	int n, len;
 	char revStr[5];
@@ -181,10 +181,7 @@ void *_easyTcpCapture(void *param) {
 			// NOTE: You could try and discard header and try again.
 		}
 
-		int pktSize = (header[7] & 0xff);
-		pktSize |= (header[6] & 0xff) << 8;
-		pktSize |= (header[5] & 0xff) << 16;
-		pktSize |= (header[4] & 0xff) << 24;
+		int pktSize = ntohl(*(unsigned int *)&header[4]);
 
 		if (pktSize > tsi->maxSize) {
 			printf("Packet size is greater than max packet size.\n");
